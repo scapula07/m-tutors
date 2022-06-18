@@ -1,0 +1,88 @@
+{
+  "name": "medpum",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@alch/alchemy-web3": "^1.4.2",
+    "@emotion/react": "^11.9.0",
+    "@emotion/styled": "^11.8.1",
+    "@maticnetwork/maticjs": "^3.3.0",
+    "@metamask/detect-provider": "^1.2.0",
+    "@mui/material": "^5.8.1",
+    "@openzeppelin/contracts": "^4.6.0",
+    "@testing-library/jest-dom": "^5.16.1",
+    "@testing-library/react": "^12.1.2",
+    "@testing-library/user-event": "^13.5.0",
+    "assert": "^2.0.0",
+    "autosize": "^5.0.1",
+    "axios": "^0.24.0",
+    "bootstrap": "^5.1.3",
+    "buffer": "^6.0.3",
+    "crypto-browserify": "^3.12.0",
+    "dotenv": "^16.0.1",
+    "fetch": "^1.1.0",
+    "firebase": "^9.6.2",
+    "fuse.js": "^6.6.2",
+    "history": "^5.3.0",
+    "https-browserify": "^1.0.0",
+    "ipfs-http-client": "^56.0.3",
+    "lunr": "^2.3.9",
+    "moralis": "^1.8.0",
+    "os-browserify": "^0.3.0",
+    "postcss": "^8.4.5",
+    "process": "^0.11.10",
+    "react": "^17.0.2",
+    "react-app-rewired": "^2.2.1",
+    "react-bootstrap": "^2.1.0",
+    "react-dom": "^17.0.2",
+    "react-helmet": "^6.1.0",
+    "react-icons": "^4.3.1",
+    "react-loader-spinner": "^5.1.5",
+    "react-lunr": "^1.1.0",
+    "react-moralis": "^1.4.0",
+    "react-player": "^2.10.1",
+    "react-router-dom": "^6.3.0",
+    "react-scripts": "5.0.0",
+    "react-switch": "^7.0.0",
+    "react-textarea-autosize": "^8.3.4",
+    "recoil": "^0.7.3-alpha.2",
+    "socket.io-client": "^4.5.1",
+    "stream-browserify": "^3.0.0",
+    "stream-http": "^3.2.0",
+    "url": "^0.11.0",
+    "uuid": "^8.3.2",
+    "web-vitals": "^2.1.3",
+    "web3": "^1.7.3",
+    "web3.storage": "^4.2.0"
+  },
+  "scripts": {
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "build:css": "tailwind build src/styles/tailwind.css -o src/styles/main.css",
+    "build:watch": "tailwind build src/styles/tailwind.css -o src/styles/main.css --watch"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "react-hook-form": "^7.22.5",
+    "tailwindcss": "^3.0.12"
+  }
+}
