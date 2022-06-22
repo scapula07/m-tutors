@@ -1,6 +1,6 @@
 import MainLayout from "../layouts/mainlayout"
 import { currentUserState } from "../recoil/globalState";
-import {constSelector, useRecoilValue} from "recoil"
+import { useRecoilValue} from "recoil"
 import Card from "../components/card"
 import profileImg from "../images/profile.png"
 import Badge from "../components/badge";
@@ -14,8 +14,9 @@ import "../styles/channel.css"
 import {BsInfo} from "react-icons/bs"
 import Switch from "react-switch";
 import {AiOutlineCloseCircle} from "react-icons/ai"
-import { Routes, Route, useParams } from 'react-router-dom';
- const UserProfile =({match})=> {
+
+
+ const UserProfile =()=> {
      const currentUser =useRecoilValue(currentUserState)
      const [courseTrigger,setCourseTrigger] =useState(false)
      const [demoTrigger,setDemoTrigger] =useState(false)
@@ -23,9 +24,9 @@ import { Routes, Route, useParams } from 'react-router-dom';
      const [eduTrigger,setEduTrigger] =useState(false)
      const [costTrigger,setCostTrigger] =useState(false)
      const [available,setAvailable]=useState(false)
-     const { id } = useParams();
+   
      
-     console.log(currentUser,id)
+   
     return (
       <MainLayout>
            <Card cname="flex flex-row border-b-2 mb-4">

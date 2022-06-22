@@ -6,11 +6,9 @@ import {useLocation,Navigate,Outlet} from "react-router-dom"
     const currentUser =useRecoilValue(currentUserState)
     const location =useLocation()
   return (
-       
-            currentUser.email? <Outlet/> :<Navigate to="/" state={{from:location}} replace/>
-    
-       
-  )
+       <>
+       </>
+    )
 }
 export default RequireAuth
 

@@ -2,7 +2,8 @@ import MainLayout from "../layouts/mainlayout"
 import Card from "../components/card"
 import {FiSettings} from "react-icons/fi"
 import Badge from "../components/badge"
-import { Outlet,Link } from "react-router-dom"
+import { Link,Outlet } from "react-router-dom"
+
 const Channel =()=>{
       const name="bartholomew onogwu"
     
@@ -19,7 +20,7 @@ const Channel =()=>{
                         <span  className="text-xl hover:underline hover:decoration-cyan-200"><Link to="playlists">Playlists</Link></span>
                     </Card>
                    <Card cname="">
-                         <Outlet />
+                        <Outlet />
                     </Card>
                 </div>
             </div>

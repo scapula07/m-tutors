@@ -1,6 +1,6 @@
 
 import { useEffect,useState } from "react"
-import { Link,useLocation} from "react-router-dom";
+import { Link } from "react-router-dom";
 import Card from "../components/card"
 import { currentUserState } from "../recoil/globalState";
 import { useRecoilValue } from "recoil";
@@ -8,8 +8,8 @@ import { useRecoilValue } from "recoil";
 const Index=({provider,userAuth,email,setEmail})=>{
      const [error,setError] =useState("")
      const currentUser =useRecoilValue(currentUserState)
-     const {pathname}=useLocation()
-     console.log(pathname,"path")
+   //  const {pathname}=useLocation()
+   //  console.log(pathname,"path")
   //   const location=useLocation()
     // const from =location.state?.from?.pathname
    // const router =useRouter()
@@ -24,6 +24,7 @@ const Index=({provider,userAuth,email,setEmail})=>{
 
     },[provider])
     console.log(currentUser.id,"ibd")
+  
     return(
         <div>
             {error&& <Card>{error}</Card>}
@@ -31,9 +32,9 @@ const Index=({provider,userAuth,email,setEmail})=>{
                 <input placeholder="Enter email address"  name="email" value={email} onChange={(e)=>setEmail(e.target.value)}/>
                  {window.ethereum&& <button className="bg-red-400" onClick={userAuth}>Connect with Metamask</button>}
                  {!window.ethereum&& <button className="bg-green-400 ">connect with Metamask</button>}
-                 <Link to="/channel/dbhebaera">video</Link>
-                 <Link to={`/user/${currentUser.id}`}>profile</Link>
+                 <Link to="/watch">watch</Link>
                  <Link to="/tutors">tutors</Link>
+                 <Link to={`/channel/${currentUser.id}`}>channel</Link>
              </Card>
              <span>index</span>
         </div>

@@ -5,7 +5,7 @@ import Watch from "./pages/watch.js";
 import Index from "./pages/index";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Channel from "./pages/channel";
-import MyVideos from "./components/myvideos";
+import MyVideos from "./components/channel/myvideos";
 import PlayList from "./components/playlists";
 import detectEthereumProvider from "@metamask/detect-provider"
 import { collection, addDoc,getDoc,getDocs, doc } from "firebase/firestore"; 
@@ -17,13 +17,14 @@ import Tutors from "./pages/tutors";
 import TutorPage from "./pages/tutorpage";
 import UserProfile from "./pages/userprofile";
 import RequireAuth from "./components/requireAuth";
-const { createMemoryHistory } = require("history");
+import MessengerPage from "./pages/messengerpage";
+import VideoMeet from "./pages/videomeet";
 
 const App=()=> {
   const [provider,setProvider]=useState({})
   const [currentUser,setCurrentUser] =useRecoilState(currentUserState)
   const [email,setEmail] =useState("")
-  const history = createMemoryHistory();
+
    const web3loader=async() =>{
       
     const webProvider = await detectEthereumProvider();
@@ -130,7 +131,7 @@ const App=()=> {
     console.log(currentUser,"created")
   return (
     <div className="App">
-         <Router location={history.location} navigator={history}>
+     
          <Routes>
             {/**public route */}
            <Route exact path="/"  element={<Index provider={provider} userAuth={userAuth} email={email} setEmail={setEmail} />} />
@@ -144,8 +145,10 @@ const App=()=> {
                  <Route exact path="/tutors" element={<Tutors />} />
                 <Route exact path="/tutor/:id" element={<TutorPage />} />
               <Route exact path="/user/:id" element={<UserProfile />} />
+              <Route exact path="/messenger" element={<MessengerPage />}/>
+              <Route exact path="/Videomeet" element={<VideoMeet />}/>
            </Routes>
-           </Router>
+           
      </div>
   );
 }

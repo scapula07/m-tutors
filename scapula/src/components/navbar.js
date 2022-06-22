@@ -12,7 +12,7 @@ const NavBar=()=>{
            <li> <AiOutlineVideoCameraAdd className="text-2xl"/></li>
            <li><GrNotification  className="text-2xl"/></li>
            <li><Badge cname="bg-fuchsia-400 h-10 w-9 border-2">B</Badge></li>
-           <li><Link><Badge><RiMessengerFill className="text-2xl"/></Badge></Link></li>
+           <li><Link to="/messenger"><Badge><RiMessengerFill className="text-2xl"/></Badge></Link></li>
         </ol>
           
        </nav>

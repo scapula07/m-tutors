@@ -1,17 +1,17 @@
-import {vidContract} from "../web3utils/web3contractinstances"
-import {useEffect,useState} from "react"
-import {videoListState,currentUserState} from "../recoil/globalState"
+
+import {useEffect,useState,useRef} from "react"
+import {videoListState,currentUserState} from "../../recoil/globalState"
 import {useRecoilValue,useRecoilState} from "recoil"
-import reelImage from "../images/reel.jpg"
-import uploadIcon from "../images/upload.png"
-import Card from "./card"
-import Modal from "./modal"
-import "../styles/channel.css"
+import reelImage from "../../images/reel.jpg"
+import uploadIcon from "../../images/upload.png"
+import Card from "../card"
+import Modal from "../modal"
+import "../../styles/util.css"
 import { useMoralis } from "react-moralis";
 import { Oval } from  'react-loader-spinner'
 import { v4 as uuidv4 } from 'uuid';
 import { collection, query, where, getDocs,addDoc} from "firebase/firestore";
-import {db} from "../firebase/firebase.utils"
+import {db} from "../../firebase/firebase.utils"
 
 
 
@@ -30,24 +30,27 @@ const MyVideos =()=>{
       const [videoDescription,setDescription]=useState("")
       const [loader,setLoader]=useState(false)
       const currentUser =useRecoilValue(currentUserState)
+      console.log(currentUser.addresses,"cuuuuu>>>>>")
     useEffect(()=>{
          const fetchVideo=async () =>{
 
-          const docQuery =query(collection(db, "videos"),where("address", "==",currentUser.account))
+          const docQuery =query(collection(db, "videos"),where("address", "array-contains-any",currentUser.addresses))
           const docSnapshot = await getDocs(docQuery);
           setVideoList(docSnapshot.docs)
          }
          fetchVideo()
+         
+        
     },[])
     console.log(videoList)
     const handleFiles=(e)=>{
       setFile(e.target.files[0]);
       setIsFilePicked(true);
 
-   
+
   }
 console.log(selectedFile)
-console.log("user", currentUser.account)
+console.log("user", )
 
 const handleUpload=async()=>{
  
@@ -86,15 +89,18 @@ const handleUpload=async()=>{
   
 
   const uploadMetaData=async ()=>{
+    const account =window.localStorage.getItem("currentAccount")
+    console.log(account,"ac>>>>>>")
+      
     const payload={
-      address :currentUser.account,
+      address :account,
       videoUrl:videoipfsLink,
       thumbnailUrl:imageIpfsLink,
       tag:videoTag,
       title:videoTitle,   
      
     }
-    const docRef = await addDoc(collection(db, "users"),payload);
+    const docRef = await addDoc(collection(db, "videos"),payload);
     console.log(docRef.id)
   }
   console.log(videoipfsLink + "video")
@@ -102,18 +108,18 @@ const handleUpload=async()=>{
 
   return(
       <div className="h-full">
-         {videoList.length===0?
+         {videoList.length===0&&(
             <div>
-                <Card cname="flex flex-col content-center">
+                <Card cname="flex-center">
                    <img src={reelImage} className=" h-32 w-32 rounded-full " />
                    <span className="text-lg">No video contents available</span>
                   < button className="rounded-full bg-blue-400 text-lg text-white w-40" onClick={()=>setTrigger(true)}>UPLOAD VIDEOS</button>
                 </Card>
               
-                <Modal trigger={trigger} cname=" bg-white modal-upload border-2 rounded-md shadow w-10/12">
+                <Modal trigger={trigger} cname=" bg-white border-2 rounded-md shadow w-10/12">
                      
                      {!isFilePicked?
-                      <Card cname="grid grid-rows-2 ">
+                      <Card cname="flex-center ">
                         <img src={uploadIcon} className="h-24 w-24 rounded-full"/>
                          <input type="file" name="file" onChange={handleFiles}/>
                       </Card>
@@ -191,12 +197,8 @@ const handleUpload=async()=>{
                      
                 </Modal>
             </div>
-            :
-            <Card>
-
-              
-            </Card>
-        }
+         )
+          }
       </div>
   )
 }

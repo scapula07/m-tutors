@@ -4,11 +4,11 @@ import {GoVerified} from "react-icons/go"
 import {ImLocation2} from "react-icons/im"
 import {AiFillStar} from "react-icons/ai"
 import Modal from "./modal"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import MiniChats from "./messenger/chats"
 import { FaBullseye } from "react-icons/fa"
 import profileImage from "../images/profile.png"
-import { useRecoilValue } from "recoil"
+import { useRecoilState, useRecoilValue } from "recoil"
 import { currentUserState } from "../recoil/globalState";
 import {doc,setDoc,addDoc,collection,getDoc,getDocs,query, where} from "firebase/firestore"
 import { errorPrefix } from "@firebase/util"
@@ -21,6 +21,7 @@ const Tutor =({tutor})=>{
     const currentUser=useRecoilValue(currentUserState)
     const {pathname}=useLocation()
     console.log(pathname,"path")
+
     const handleMakeConversation=async()=>{
         const payload={
             members:[currentUser.id,tutor.id]

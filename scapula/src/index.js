@@ -4,16 +4,16 @@ import {RecoilRoot} from "recoil"
 import { MoralisProvider } from "react-moralis"
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-
-
-
+import { BrowserRouter as Router } from "react-router-dom"
 
 
 ReactDOM.render(
   <React.StrictMode>
     <RecoilRoot>
       <MoralisProvider  serverUrl="https://twyrtcrfrfkd.usemoralis.com:2053/server" appId="hNI1RMG8snOeIlRjEw2XhebzJIflCNb4kB9CtFuW" >
-        <App />   
+      <  Router >
+        <App /> 
+      </Router>
        </MoralisProvider>
     </RecoilRoot>
   
