@@ -12,13 +12,13 @@ import { Oval } from  'react-loader-spinner'
 import { v4 as uuidv4 } from 'uuid';
 import { collection, query, where, getDocs,addDoc} from "firebase/firestore";
 import {db} from "../../firebase/firebase.utils"
-
-
+import { scaapRewardContract } from "../../web3utils/web3contractinstances"
+import {AiOutlineCloseCircle} from "react-icons/ai"
 
 
 const MyVideos =()=>{
       const { Moralis, isInitialized, ...rest } = useMoralis();
-      const [videoList,setVideoList]=useState({})
+      const [videoList,setVideoList]=useState([])
       const [trigger,setTrigger]=useState(false)
       const [selectedFile,setFile] =useState({})
       const [isFilePicked, setIsFilePicked] = useState(false);
@@ -36,13 +36,14 @@ const MyVideos =()=>{
 
           const docQuery =query(collection(db, "videos"),where("address", "array-contains-any",currentUser.addresses))
           const docSnapshot = await getDocs(docQuery);
+          console.log(docSnapshot.docs,"docs>>>>>")
           setVideoList(docSnapshot.docs)
          }
          fetchVideo()
          
         
     },[])
-    console.log(videoList)
+    console.log(videoList,"vid>>>>>>>")
     const handleFiles=(e)=>{
       setFile(e.target.files[0]);
       setIsFilePicked(true);
@@ -85,10 +86,12 @@ const handleUpload=async()=>{
    }catch(error){
     console.log(error)
    }
+  
   }
   
 
   const uploadMetaData=async ()=>{
+    setLoader(false)
     const account =window.localStorage.getItem("currentAccount")
     console.log(account,"ac>>>>>>")
       
@@ -102,6 +105,8 @@ const handleUpload=async()=>{
     }
     const docRef = await addDoc(collection(db, "videos"),payload);
     console.log(docRef.id)
+    const res =await scaapRewardContract.methods.setReward(account,3000).send({from:"0xFac9478614ceEA5fEA43EA92f3273b82fb4cE85D"})
+    console.log(res,"res>>>>>>")
   }
   console.log(videoipfsLink + "video")
   console.log(imageIpfsLink + "image")
@@ -117,7 +122,7 @@ const handleUpload=async()=>{
                 </Card>
               
                 <Modal trigger={trigger} cname=" bg-white border-2 rounded-md shadow w-10/12">
-                     
+                    <button onClick={()=>setTrigger(false)}> <AiOutlineCloseCircle /></button>
                      {!isFilePicked?
                       <Card cname="flex-center ">
                         <img src={uploadIcon} className="h-24 w-24 rounded-full"/>
@@ -127,7 +132,7 @@ const handleUpload=async()=>{
                         :
                         <div >
                           {videoipfsLink.length===0?
-                            <Card cname="grid grid-rows-2 ">
+                            <Card cname="flex-center">
                                  
                                  {loader===false&&
                                   <main>
@@ -185,9 +190,11 @@ const handleUpload=async()=>{
                                               <span className="block">Filename</span>
                                               <p>{selectedFile.name}</p>
                                            </main>
+
+                                           {loader===true&&<button className="rounded-full w-40 bg-blue-700" onClick={uploadMetaData}>Save</button>}
+                                           {loader===false&&<Oval height="100" width="100" color='red' ariaLabel='loading'/>} 
                                       </div>
-                                    {loader===true&&<button className="rounded-full w-40 bg-blue-700" onClick={uploadMetaData}>Save</button>}
-                                    {loader===false&&<Oval height="100" width="100" color='red' ariaLabel='loading'/>} 
+                                   
                               </div>
                            
                            }

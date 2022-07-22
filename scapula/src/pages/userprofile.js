@@ -25,7 +25,25 @@ import {AiOutlineCloseCircle} from "react-icons/ai"
      const [costTrigger,setCostTrigger] =useState(false)
      const [available,setAvailable]=useState(false)
    
-     
+
+     const AddCourse=async()=>{
+         
+     }
+     const AddDemo=async()=>{
+         
+   }
+   const AddLanguage=async()=>{
+         
+   }
+   const AddToCourse=async()=>{
+         
+   }
+   const AddEducation=async()=>{
+         
+   }
+   const AddCharge=async()=>{
+         
+   }
    
     return (
       <MainLayout>
@@ -65,7 +83,7 @@ import {AiOutlineCloseCircle} from "react-icons/ai"
                               <label className="mt-10 font-medium ml-7 text-xl">Cover letter</label>
                               <textarea  
                               placeholder="Write briefly,describe yourself and your teaching abilities" 
-                              className="text-white text-lg font-light h-44 w-4/5 block mt-10 bg-slate-300 shadow-lg rounded-lg ml-6 mb-10 p-3" />
+                              className="text-white text-lg font-light h-44 w-4/5 block mt-10 bg-slate-300 shadow-lg rounded-lg ml-6 mb-10 p-3 outline-none" />
                                 
                               <h2 className="flex flex-row mt-10 ml-7  space-x-4"><span className="font-medium text-xl">Courses</span> <Badge cname="bg-white inline"><GrAdd className=" text-xl" onClick={()=>setCourseTrigger(true)}/></Badge> </h2>
                                <Modal trigger={courseTrigger} cname="w-3/4 h-72">

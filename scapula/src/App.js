@@ -1,5 +1,7 @@
 import {Routes,Route,BrowserRouter as Router } from "react-router-dom"
 import "./index.css"
+import "./styles/font.css"
+
 import {useEffect,useState} from "react"
 import Watch from "./pages/watch.js";
 import Index from "./pages/index";
@@ -19,6 +21,12 @@ import UserProfile from "./pages/userprofile";
 import RequireAuth from "./components/requireAuth";
 import MessengerPage from "./pages/messengerpage";
 import VideoMeet from "./pages/videomeet";
+import WatchVideo from "./components/watchvideo";
+import Wallet from "./pages/wallet"
+import Payment from "./pages/payment";
+import CryptoPayment from "./components/payment/cryptogateway";
+import DebitCard from "./components/payment/debitcard";
+import PaystackGateway from "./components/payment/paystackgateway";
 
 const App=()=> {
   const [provider,setProvider]=useState({})
@@ -130,12 +138,13 @@ const App=()=> {
  
     console.log(currentUser,"created")
   return (
-    <div className="App">
+    <div className="font-lato">
      
          <Routes>
             {/**public route */}
            <Route exact path="/"  element={<Index provider={provider} userAuth={userAuth} email={email} setEmail={setEmail} />} />
            <Route  exact path="/watch"  element={<Watch />} />
+           <Route  exact path="/watch/:id"  element={<WatchVideo />} />
              {/**Private roues */}
              
                  <Route  exact path="/channel/:id"  element={<Channel />}>
@@ -147,6 +156,13 @@ const App=()=> {
               <Route exact path="/user/:id" element={<UserProfile />} />
               <Route exact path="/messenger" element={<MessengerPage />}/>
               <Route exact path="/Videomeet" element={<VideoMeet />}/>
+              <Route exact path="/wallet" element={<Wallet />}/>
+              <Route exact path="/payment" element={<Payment/>}> 
+                <Route exact path="crytopaymentgateway" element={<CryptoPayment/>}/>
+                <Route exact path="debit" element={<DebitCard/>} />
+                <Route exact path="paystack" element={<PaystackGateway/>} />
+              </Route>
+              
            </Routes>
            
      </div>
